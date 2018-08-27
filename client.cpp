@@ -174,7 +174,7 @@ int makeAsynchCall(LPTSTR lpszPipename, LPTSTR lpvMessage)
     cbToWrite = (lstrlen(lpvMessage)+1)*sizeof(TCHAR);
     _tprintf( TEXT("Sending %d byte message: \"%s\"\n"), cbToWrite, lpvMessage); 
 
-    fSuccess = WriteFile( 
+    fSuccess = WriteFileEx( 
         hPipe,                  // pipe handle 
         lpvMessage,             // message 
         cbToWrite,              // message length 
