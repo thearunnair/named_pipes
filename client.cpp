@@ -187,7 +187,7 @@ int makeAsynchCall(LPTSTR lpszPipename, LPTSTR lpvMessage)
     }
 
     printf("\nMessage sent to server, receiving reply as follows:\n");
-    //do { 
+    do { 
         fSuccess = ReadFile( 
             hPipe,    // pipe handle 
             chBuf,    // buffer to receive reply 
@@ -201,7 +201,7 @@ int makeAsynchCall(LPTSTR lpszPipename, LPTSTR lpvMessage)
         }
     
         _tprintf( TEXT("\"%s\"\n"), chBuf ); 
-   // } while ( ! fSuccess);  // repeat loop if ERROR_MORE_DATA 
+    } while ( ! fSuccess);  // repeat loop if ERROR_MORE_DATA 
 
     if ( ! fSuccess) {
         _tprintf( TEXT("ReadFile from pipe failed. GLE=%d\n"), GetLastError() );
@@ -209,7 +209,6 @@ int makeAsynchCall(LPTSTR lpszPipename, LPTSTR lpvMessage)
     }
 
     printf("\n<End of message, press ENTER to terminate connection and exit>\n");
-    //_getch();
     
     CloseHandle(hPipe); 
     printf("Closed handle\n");
@@ -224,10 +223,10 @@ int _tmain(int argc, char *argv[])
     
     if (strcmp(argv[1], "asynch") == 0)
         makeAsynchCall(lpszPipename, lpvMessageA);
-    
-    if (strcmp(argv[1], "synch") == 0)
+    else if (strcmp(argv[1], "synch") == 0)
         makeSynchCall(lpszPipename, lpvMessageB);
+    else
+        printf("Please specify whether client will connect asynchronously with option \"asynch\" or synchronously with option \"synch\"\n");
 
-    printf("End of the main\n");
     return 0;
 }
