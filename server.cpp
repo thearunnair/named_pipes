@@ -321,14 +321,6 @@ BOOL ConnectToNewClient(HANDLE hPipe, LPOVERLAPPED lpo)
 VOID GetAnswerToRequest(LPPIPEINST pipe)
 {
    _tprintf( TEXT("[%d] %s\n"), pipe->hPipeInst, pipe->chRequest);
-   //SleepEx(3000, FALSE);
-   int x = 0;
-   while (x < 5)
-   {
-        printf("Keep trying\n");
-        SleepEx(1000, FALSE);
-        x++;
-   }
    StringCchCopy( pipe->chReply, BUFSIZE, TEXT("Default answer from server") );
    pipe->cbToWrite = (lstrlen(pipe->chReply)+1)*sizeof(TCHAR);
 }
