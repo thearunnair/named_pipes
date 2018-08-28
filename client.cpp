@@ -90,7 +90,7 @@ int makeSynchCall(LPTSTR lpszPipename, LPTSTR lpvMessage)
    }
 
    printf("\n<End of message, press ENTER to terminate connection and exit>\n");
-   //_getch();
+   _getch();
  
    CloseHandle(hPipe);
    printf("Closed handle\n");
