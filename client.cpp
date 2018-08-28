@@ -174,12 +174,12 @@ int makeAsynchCall(LPTSTR lpszPipename, LPTSTR lpvMessage)
     cbToWrite = (lstrlen(lpvMessage)+1)*sizeof(TCHAR);
     _tprintf( TEXT("Sending %d byte message: \"%s\"\n"), cbToWrite, lpvMessage); 
 
-    fSuccess = WriteFileEx( 
+    fSuccess = WriteFile( 
         hPipe,                  // pipe handle 
         lpvMessage,             // message 
         cbToWrite,              // message length 
         &cbWritten,             // bytes written 
-        &overlapped);           //overlapped for asynchronous comms.
+        NULL);
 
     if ( ! fSuccess) {
         _tprintf( TEXT("WriteFile to pipe failed. GLE=%d\n"), GetLastError() ); 
