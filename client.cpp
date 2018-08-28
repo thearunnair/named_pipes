@@ -188,13 +188,12 @@ int makeAsynchCall(LPTSTR lpszPipename, LPTSTR lpvMessage)
 
     printf("\nMessage sent to server, receiving reply as follows:\n");
     //do { 
-        fSuccess = ReadFileEx( 
+        fSuccess = ReadFile( 
             hPipe,    // pipe handle 
             chBuf,    // buffer to receive reply 
             BUFSIZE*sizeof(TCHAR),  // size of buffer 
-            //&cbRead,  // number of bytes read 
-            &overlapped,
-            (LPOVERLAPPED_COMPLETION_ROUTINE)CompletedReadRoutine);    // not overlapped 
+            &cbRead,  // number of bytes read 
+            NULL);
     
         if ( ! fSuccess && GetLastError() != ERROR_MORE_DATA ) {
             printf("Got nothing, returning\n"); 
